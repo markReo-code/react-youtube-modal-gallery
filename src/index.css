@@ -1,17 +1,7 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-} */
+:root {
+  --modal-gap-x: 160px; /* 左右の最低余白 */
+  --modal-gap-y: 120px; /* 上下の最低余白 */
+}
 
 * {
   margin: 0;
@@ -24,7 +14,8 @@ html {
 }
 
 body {
-  padding: 100px 0;
+  font-family: "Noto Sans JP", Arial, Helvetica, sans-serif;
+  color: #111111;
 }
 
 img {
@@ -44,6 +35,11 @@ a {
 button {
   background-color: transparent;
   border: none;
+  color: inherit;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
 }
 
 .inner {
@@ -53,21 +49,26 @@ button {
   margin: 0 auto;
 }
 
+.page__section {
+  padding: 80px 0;
+}
+
+.page__title {
+  font-size: 3.6rem;
+  margin-bottom: 36px;
+}
+
 .video__list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
 }
 
-.video__item {
-
-}
-
 .video__thumbWrapper {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden; 
-  background: #000;       /* 読み込み中の背景（お好み） */
+  background: #111111;
 }
 
 .video__thumb {
@@ -78,57 +79,88 @@ button {
 }
 
 .video__title {
-  margin-top: 8px;
   font-size: 1.4rem;
   text-align: left;
-  color: #111111;
+  margin-top: 8px;
 }
 
 /* モーダルのスタイル */
-.modal-overlay {
+.modal {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  padding: 20px;
-  /* background-color: #1b1716e6; */
-  background-color: #dddddd;
+  background-color: #1b1716e6;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* animation: fadeIn 0.3s ease-in-out; */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease-out, visibility .3s ease-out;
 }
 
-.modal-content {
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal__content {
   background: #111111;
-  width: calc(100% - 16rem);
-  max-width: 1200px;
+  width: min(
+    calc(100vw - 2 * var(--modal-gap-x)), 
+    calc((100vh - 2 * var(--modal-gap-y)) * 16 / 9) 
+  );
   aspect-ratio: 16 / 9;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.modal__close {
+.modal__close-button {
   position: absolute;
   top: -53px;
   right: -53px;
   border: none;
   width: 50px;
   height: 50px;
-  background: #3073B5;
+  background: #ffffff;
   border-radius: 50%;
   cursor: pointer;
 }
 
+.modal__close-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 1024px) {
+  :root {
+  --modal-gap-x: 120px;
+  --modal-gap-y: 80px;
+  }
+
   .video__list {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 767px) {
+  :root {
+  --modal-gap-x: 20px;
+  --modal-gap-y: 24px;
+  }
+
+  .page__section {
+    padding: 60px 0;
+  }
+
+  .page__title {
+    font-size: 3.2rem;
+    margin-bottom: 32px;
+  }
+
   .inner {
     padding-inline: 24px;
   }
@@ -137,14 +169,16 @@ button {
     gap: 36px 24px;
   }
 
-  .modal-content {
-    width: 100%;
-  }
-  .modal__close {
+  .modal__close-button {
     width: 36px;
     height: 36px;
     top: -50px;
     right: -4px;
+  }
+
+  .modal__close-icon {
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -154,49 +188,3 @@ button {
     gap: 24px;
   }
 }
-
-
-/* body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
