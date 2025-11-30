@@ -13,6 +13,13 @@ React + TypeScript で実装した、YouTube 動画のサムネイル一覧か�
 以前にクライアントワーク（Web 制作）で、動画一覧をリスト形式で表示し、各カードをクリックするとモーダルウィンドウで再生する実装を担当しました。  
 その経験から「同じことを React + TypeScript ではどう実装するか？」を整理したいと考え、ReactPlayer を使った汎用的なテンプレートとしてまとめたのが本リポジトリです。
 
+## 関連記事（解説）
+
+実装の手順や設計の意図、アクセシビリティ対応の考え方は  
+Zenn の記事にまとめています。
+
+- [React + TypeScriptで複数のYouTube動画をモーダルウィンドウで再生するギャラリーを作る](https://zenn.dev/markreo/articles/40eac59e8596fd)
+
 ## 技術スタック
 - React + TypeScript（Vite）
 - ReactPlayer
